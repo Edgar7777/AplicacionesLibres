@@ -5,9 +5,11 @@
  */
 package interfaz;
 
+import ControlDB.Conexion;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.management.remote.JMXConnectorFactory;
 
 /**
  *
@@ -158,6 +160,9 @@ public class Bienvenida extends javax.swing.JFrame {
                             break;
                         case 30:
                              text.setText(("Conectando la base de datos SQLite..."));
+                             Conexion conect = new Conexion();
+                             conect.AccederBD();
+                             conect.cerrarConexion();
                             break;
                         case 40:
                             text.setText(("Iniciando modulos del cliente..."));

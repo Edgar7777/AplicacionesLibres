@@ -2,8 +2,12 @@
 package gestion_de_facturas_v2;
 
 import static gestion_de_facturas_v2.FacturasHandler.guardar;
+import interfaz.Selector;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -30,6 +34,7 @@ public class CargarArchivo {
 //        
             for(int i=0; i < guardar.size();i++){
              System.out.println(guardar.get(i));
+                
             }
         }  
     }

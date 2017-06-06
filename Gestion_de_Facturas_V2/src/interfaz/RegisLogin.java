@@ -5,17 +5,19 @@
  */
 package interfaz;
 
-/**
- *
- * @author Edgar
- */
+import ControlDB.Conexion;
+import ControlDB.OperacionesBD;
+import com.sun.jndi.ldap.Connection;
+import javax.swing.table.DefaultTableModel;
+import ControlDB.*;
+
+
+
 public class RegisLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegisLogin
-     */
     public RegisLogin() {
         initComponents();
+        
     }
 
     /**
@@ -97,7 +99,7 @@ public class RegisLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        Registrar registrar = new Registrar();
+         Registrar registrar = new Registrar();
         registrar.setVisible(true);
         registrar.setLocationRelativeTo(RegisLogin.this);
         RegisLogin.this.dispose();

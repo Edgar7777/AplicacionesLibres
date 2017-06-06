@@ -2,49 +2,23 @@ package gestion_de_facturas_v2;
 
 public class Factura {
     
-    private String claveAccesoConsultada;
-    private String ambiente;
-    private int numeroComprobante;
     private String nombreProveedor;
     private String ruc;
     private String dirMatriz;
-    private String dirEstablecimiento;
     private String nombreCliente;
     private String identificaciónCli;
     private String codFact;
     private String fechaEmision;
-    private Float campoAdicional;
+//    private Float campoAdicional;
+    private String producto;
+    private Float cantidad;
+    private Float precioUnit;
     private Float precioTotalSinImpuestos;
     private Float precioTotalConImpuestos;
-    private String nombreCampoAdicional;
+//    private String nombreCampoAdicional;
 
     public Factura() {
 
-    }
-    
-
-    public String getClaveAccesoConsultada() {
-        return claveAccesoConsultada;
-    }
-
-    public void setClaveAccesoConsultada(String claveAccesoConsultada) {
-        this.claveAccesoConsultada = claveAccesoConsultada;
-    }
-
-    public String getAmbiente() {
-        return ambiente;
-    }
-
-    public void setAmbiente(String ambiente) {
-        this.ambiente = ambiente;
-    }
-
-    public int getNumeroComprobante() {
-        return numeroComprobante;
-    }
-
-    public void setNumeroComprobante(int numeroComprobante) {
-        this.numeroComprobante = numeroComprobante;
     }
 
     public String getNombreProveedor() {
@@ -69,14 +43,6 @@ public class Factura {
 
     public void setDirMatriz(String dirMatriz) {
         this.dirMatriz = dirMatriz;
-    }
-
-    public String getDirEstablecimiento() {
-        return dirEstablecimiento;
-    }
-
-    public void setDirEstablecimiento(String dirEstablecimiento) {
-        this.dirEstablecimiento = dirEstablecimiento;
     }
 
     public String getNombreCliente() {
@@ -111,14 +77,6 @@ public class Factura {
         this.fechaEmision = fechaEmision;
     }
 
-    public Float getCampoAdicional() {
-        return campoAdicional;
-    }
-
-    public void setCampoAdicional(Float campoAdicional) {
-        this.campoAdicional = campoAdicional;
-    }
-
     public Float getPrecioTotalSinImpuestos() {
         return precioTotalSinImpuestos;
     }
@@ -133,14 +91,29 @@ public class Factura {
 
     public void setPrecioTotalConImpuestos(Float precioTotalConImpuestos) {
         this.precioTotalConImpuestos = precioTotalConImpuestos;
+    } 
+
+    public String getProducto() {
+        return producto;
+    }
+    
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+    public Float getPrecioUnit() {
+        return precioUnit;
     }
 
-    public String getNombreCampoAdicional() {
-        return nombreCampoAdicional;
+    public void setPrecioUnit(Float precioUnit) {
+        this.precioUnit = precioUnit;
     }
 
-    public void setNombreCampoAdicional(String nombreCampoAdicional) {
-        this.nombreCampoAdicional = nombreCampoAdicional;
+    public Float getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Float cantidad) {
+        this.cantidad = cantidad;
     }
     
       

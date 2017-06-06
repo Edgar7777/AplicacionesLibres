@@ -1,6 +1,5 @@
 package gestion_de_facturas_v2;
 
-import com.sun.xml.internal.ws.util.VersionUtil;
 import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -16,7 +15,7 @@ public class FacturasHandler extends DefaultHandler{
     public ArrayList<Factura> getFacturas() {
         return facturas;
     }
-
+        
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         buffer.append(ch, start, length);
@@ -24,24 +23,11 @@ public class FacturasHandler extends DefaultHandler{
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-       double sums=0;
-       double sumc=0;
+       float sums=0;
+       float sumc=0;
         switch(qName){
-            
-             case "claveAccesoConsultada":
-                 factura.setClaveAccesoConsultada(buffer.toString());
-                 System.out.println("clave: "+ factura.getClaveAccesoConsultada());
-                 guardar.add(factura.getClaveAccesoConsultada());
-                 break;
-                
-            case "ambiente":
-                factura.setAmbiente(buffer.toString());
-                System.out.println("ambiente: "+ factura.getAmbiente());
-                guardar.add(factura.getAmbiente());
-                break;
             case "autorizacion":
-                 break;
-            
+                 break;            
             case "RespuestaAutorizacionComprobante":
                 break; 
                 
@@ -60,11 +46,6 @@ public class FacturasHandler extends DefaultHandler{
                 factura.setDirMatriz(buffer.toString());
                  System.out.println("dir matriz: "+ factura.getDirMatriz());
                  guardar.add(factura.getDirMatriz());
-                break;
-            case "dirEstablecimiento":
-                factura.setDirEstablecimiento(buffer.toString());
-                 System.out.println("dir matriz: "+ factura.getDirEstablecimiento());
-                 guardar.add(factura.getDirEstablecimiento());
                 break;
             case "razonSocialComprador":
                  factura.setNombreCliente(buffer.toString());
@@ -86,65 +67,76 @@ public class FacturasHandler extends DefaultHandler{
                  System.out.println("Fecha: "+ factura.getFechaEmision());
                   guardar.add(factura.getFechaEmision());
                 break;
-//___________________________________________________________________________________________________________                
-           case "campoAdicional":
-               switch(factura.getNombreCampoAdicional()){
-                   case "DEDUCIBLE ALIMENTACION":
-                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
-                    System.out.println("campo adicional ALIMENTACION "+ factura.getCampoAdicional());
-                    guardar.add(factura.getCampoAdicional().toString());   
-                    break;
-                    
-                    case "DEDUCIBLE VESTIMENETA":
-                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
-                    System.out.println("campo adicional Vestimente "+ factura.getCampoAdicional());
-                    guardar.add(factura.getCampoAdicional().toString());   
-                    break;
-                    
-                    case "AHORRO AFILIADO":
-                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
-                    System.out.println("campo adicional ahorro Afiliado "+ factura.getCampoAdicional());
-                    guardar.add(factura.getCampoAdicional().toString());   
-                    break;
-                    
-                     case "AHORRO POR DESCUENTOS":
-                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
-                    System.out.println("campo adicional ahorro Descuentos "+ factura.getCampoAdicional());
-                    guardar.add(factura.getCampoAdicional().toString());   
-                    break;
-                    case "AHORRO TOTAL":
-                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
-                    System.out.println("campo adicional ahorro total "+ factura.getCampoAdicional());
-                    guardar.add(factura.getCampoAdicional().toString());   
-                    break;                   
-               }                
-                break;
-                
-//_________________________________________________________________________________________________________________________
-           case "precioTotalSinImpuesto":
+            case "cantidad":
+               factura.setCantidad(Float.parseFloat(buffer.toString()));
+                System.out.println("Cantidad: "+ factura.getCantidad());
+                guardar.add(factura.getCantidad().toString());
+                  
+            case "precioUnitario":
+                 factura.setPrecioUnit(Float.parseFloat(buffer.toString()));
+                 System.out.println("Precio unit: "+ factura.getPrecioUnit());
+                  guardar.add(factura.getPrecioUnit().toString());
+            case "precioTotalSinImpuesto":
                  factura.setPrecioTotalSinImpuestos(Float.parseFloat(buffer.toString()));
-                 sums=sums+factura.getPrecioTotalSinImpuestos();
+                 sums=factura.getCantidad()*factura.getPrecioTotalSinImpuestos();
                  System.out.println("total sin imp "+ sums);
                   guardar.add(factura.getPrecioTotalSinImpuestos().toString());
                  break;
             case "precioTotalConImpuesto":
                  factura.setPrecioTotalConImpuestos(Float.parseFloat(buffer.toString()));
                  sumc=sumc+factura.getPrecioTotalConImpuestos();
-                 System.out.println("total con imp "+ sumc);
+                 //System.out.println("total con imp "+ sumc);
                  guardar.add(factura.getPrecioTotalConImpuestos().toString());
-                 break;                              
-        }       
+            case "descripcion":
+                factura.setProducto(buffer.toString());
+                 System.out.println("Producto: "+ factura.getProducto());
+                  guardar.add(factura.getProducto());
+                 break;    
+                 case "detalles":
+                    break;
+                case "detalle":
+                    break;
+//___________________________________________________________________________________________________________                
+//           case "campoAdicional":
+//               switch(factura.getNombreCampoAdicional()){
+//                   case "DEDUCIBLE ALIMENTACION":
+//                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
+//                    System.out.println("campo adicional ALIMENTACION "+ factura.getCampoAdicional());
+//                    guardar.add(factura.getCampoAdicional().toString());   
+//                    break;
+//                    
+//                    case "DEDUCIBLE VESTIMENETA":
+//                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
+//                    System.out.println("campo adicional Vestimente "+ factura.getCampoAdicional());
+//                    guardar.add(factura.getCampoAdicional().toString());   
+//                    break;
+//                    
+//                    case "AHORRO AFILIADO":
+//                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
+//                    System.out.println("campo adicional ahorro Afiliado "+ factura.getCampoAdicional());
+//                    guardar.add(factura.getCampoAdicional().toString());   
+//                    break;
+//                    
+//                     case "AHORRO POR DESCUENTOS":
+//                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
+//                    System.out.println("campo adicional ahorro Descuentos "+ factura.getCampoAdicional());
+//                    guardar.add(factura.getCampoAdicional().toString());   
+//                    break;
+//                    case "AHORRO TOTAL":
+//                        factura.setCampoAdicional(Float.parseFloat(buffer.toString()));
+//                    System.out.println("campo adicional ahorro total "+ factura.getCampoAdicional());
+//                    guardar.add(factura.getCampoAdicional().toString());   
+//                    break;                   
+//               }                
+//                break;
+//                
+//_________________________________________________________________________________________________________________________                         
+        }    
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        switch(qName){
-            case "ambiente":
-                buffer.delete(0, buffer.length());
-                break;           
-            case "claveAccesoConsultada":
-                buffer.delete(0, buffer.length());
-                break;
+        switch(qName){         
             case "RespuestaAutorizacionComprobante":
                 factura = new Factura();
                 facturas.add(factura);
@@ -162,9 +154,6 @@ public class FacturasHandler extends DefaultHandler{
             case "dirMatriz":
                 buffer.delete(0, buffer.length());
                 break;
-            case "dirEstablecimiento":
-                buffer.delete(0, buffer.length());
-                break;
             case "razonSocialComprador":
                 buffer.delete(0, buffer.length());
                 break;
@@ -177,18 +166,32 @@ public class FacturasHandler extends DefaultHandler{
             case "fechaEmision":
                  buffer.delete(0, buffer.length());
                  break;
-            case "campoAdicional":
+//            case "campoAdicional":
+//                 buffer.delete(0, buffer.length());
+//                   factura.setNombreCampoAdicional(attributes.getValue("nombre"));
+//                 break;
+                 //factura.setAlimentacion(Integer.parseInt(atributes.getValue("numero")));   
+            case "descripcion":
                  buffer.delete(0, buffer.length());
-                   factura.setNombreCampoAdicional(attributes.getValue("nombre"));
-                 break;
-                 //factura.setAlimentacion(Integer.parseInt(atributes.getValue("numero")));
+                break;
             case "precioTotalSinImpuesto":
                  buffer.delete(0, buffer.length());
                  break;
             case "precioTotalConImpuesto":
                  buffer.delete(0, buffer.length());
-                 break;    
-                 
+                 break;          
+            case "precioUnitario":
+                 buffer.delete(0, buffer.length());
+                 break;
+            case "cantidad":
+                 buffer.delete(0, buffer.length());
+                break;
+            case "detalle":
+                 buffer.delete(0, buffer.length());
+                break;
+            case "detalles":
+                 buffer.delete(0, buffer.length());
+                break;               
         }        
     }    
 }
