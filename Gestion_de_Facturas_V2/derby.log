@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Jun 06 09:19:56 COT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015c-7dc6-c1b1-00000092b190 
+Tue Jun 06 17:15:20 COT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015c-7f79-fdeb-000000946730 
 on database directory C:\Users\Edgar\Documents\NetBeansProjects\Gestion_de_Facturas_V2\DB\Derby.DB with class loader sun.misc.Launcher$AppClassLoader@52e922 
 Loaded from file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/Librerias/derby.jar
 java.vendor=Oracle Corporation

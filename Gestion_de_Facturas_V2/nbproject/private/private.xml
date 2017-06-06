@@ -4,12 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/interfaz/Bienvenida.java</file>
+            <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/facturasXML/NewClass.java</file>
             <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/ControlDB/Conexion.java</file>
             <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/ControlDB/OperacionesBD.java</file>
-            <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/interfaz/RegisLogin.java</file>
-            <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/interfaz/Login.java</file>
-            <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/gestion_de_facturas_v2/FacturasHandler.java</file>
             <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/interfaz/Selector.java</file>
+            <file>file:/C:/Users/Edgar/Documents/NetBeansProjects/Gestion_de_Facturas_V2/src/interfaz/Registrar.java</file>
         </group>
     </open-files>
 </project-private>

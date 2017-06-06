@@ -87,7 +87,9 @@ public class RegisLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirRLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirRLActionPerformed
+        Conexion conect = new Conexion();
         System.exit(0);
+        conect.cerrarConexion();
         dispose();
     }//GEN-LAST:event_btnSalirRLActionPerformed
 

@@ -1,5 +1,7 @@
 package interfaz;
 
+import ControlDB.Conexion;
+import ControlDB.OperacionesBD;
 import static gestion_de_facturas_v2.FacturasHandler.guardar;
 import gestion_de_facturas_v2.CargarArchivo;
 import gestion_de_facturas_v2.Factura;
@@ -8,11 +10,13 @@ import java.awt.Component;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.xml.parsers.ParserConfigurationException;
@@ -146,14 +150,7 @@ public class Selector extends javax.swing.JFrame {
 
         tblFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Producto", "Cantidad", "Precio", "Total con IVA", "Total sinIVA", "Gastos por"
@@ -174,6 +171,7 @@ public class Selector extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tblFactura);
 
         btnGuardar.setText("Guardar");
@@ -212,7 +210,7 @@ public class Selector extends javax.swing.JFrame {
                         .addComponent(btnSalirS, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblNomProv, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,15 +239,12 @@ public class Selector extends javax.swing.JFrame {
                                     .addComponent(txtCedulaCli)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCodFactura)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))))))
-                .addGap(0, 16, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))))
                     .addComponent(dirProv)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(rucProv)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +256,7 @@ public class Selector extends javax.swing.JFrame {
                     .addComponent(txtNombreProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNomCli)
                     .addComponent(txtNomCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rucProv, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRucProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,7 +276,7 @@ public class Selector extends javax.swing.JFrame {
                     .addComponent(lblFecha)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
@@ -300,15 +295,29 @@ public class Selector extends javax.swing.JFrame {
        regisLogin.setLocationRelativeTo(Selector.this);
        Selector.this.dispose();
     }  
-    private void btnSalirSActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnSalirSActionPerformed(java.awt.event.ActionEvent evt) {  
+        Conexion conect = new Conexion();
         System.exit(0);
+        conect.cerrarConexion();
         dispose();
-    }    
-    
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        
-    }                                          
+    }              
 
+     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) { 
+//        Object [][] dtCli;
+//         dtCli = op.getClientes(con);
+//        Conexion con = new Conexion();
+//        OperacionesBD op = new OperacionesBD();
+//        Connection conect = con.AccederBD();
+//        
+//         op.insert("Factura","nombreProb ,rucProv , dirProv, "
+//                + "nombreCli, cedulaCli, codigo, fecha , totGastoAlimentacion ,"
+//                + "totGastoVestimenta,totGastoVivienda, totGastoSalud,totGastoEducacion ,"
+//                + "totGastoOtros,totFactSinIVA, totFactConIVA ","'" + txtNombreProv.getText()+ "','"+txtRucProv.getText()+ "','"
+//                        + ""+txtDirProv.getText()+"','"+txtNomCli.getText()+"','"+ txtCedulaCli.getText()+ "','"+txtCodFactura.getText()+ "','"
+//                        + ""+txtFecha.getText()+"','"+null+"','"+ null+ "','"+null+ "','"
+//                        + ""+null+"','"null+"','"+ null+ "'",con);
+//         conect.cerracon();       
+    } 
 /*    
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
          
@@ -352,6 +361,8 @@ public class Selector extends javax.swing.JFrame {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            DefaultTableModel model =(DefaultTableModel) tblFactura.getModel();
+            Object [] fila = new Object[tblFactura.getColumnCount()];
             for(int i=0; i < guardar.size();i++){
               this.txtNombreProv.setText(guardar.get(0));
               this.txtRucProv.setText(guardar.get(1));
@@ -359,13 +370,22 @@ public class Selector extends javax.swing.JFrame {
               this.txtDirProv.setText(guardar.get(3));
               this.txtFecha.setText(guardar.get(4));
               this.txtNomCli.setText(guardar.get(5));
-              this.txtCedulaCli.setText(guardar.get(6));
+              this.txtCedulaCli.setText(guardar.get(6));   
+              fila[0] = guardar.get(7);
+              fila[1] = guardar.get(8);
+              fila[2] = guardar.get(11);
+              fila[3] = guardar.get(12);
+              fila[4] = guardar.get(13);                
             }
-           
+            model.addRow(fila);
+              
     }//GEN-LAST:event_btnSeleccionarActionPerformed
-/*
+
+        
+        
+        /*
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_btnGuardarActionPerformed
 */
 }

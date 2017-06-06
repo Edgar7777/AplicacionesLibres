@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import ControlDB.Conexion;
+
 /**
  *
  * @author Edgar
@@ -102,7 +104,9 @@ public class Registrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        Conexion conect = new Conexion();
         System.exit(0);
+        conect.cerrarConexion();
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 

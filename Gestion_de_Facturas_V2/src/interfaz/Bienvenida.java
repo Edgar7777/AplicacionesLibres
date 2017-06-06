@@ -159,10 +159,10 @@ public class Bienvenida extends javax.swing.JFrame {
                             text.setText("Cargando Facturas...");
                             break;
                         case 30:
-                             text.setText(("Conectando la base de datos SQLite..."));
+                             text.setText(("Conectando la base de datos Derby..."));
                              Conexion conect = new Conexion();
                              conect.AccederBD();
-                             conect.cerrarConexion();
+                             
                             break;
                         case 40:
                             text.setText(("Iniciando modulos del cliente..."));
